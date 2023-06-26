@@ -81,22 +81,6 @@ def handler(ctx, data: io.BytesIO = None):
 
 
 
-    # try:
-    #     body = json.loads(data.getvalue())
-    # except (Exception, ValueError) as ex:
-    #     logging.getLogger().info('error occured parsing json data payload: ' + str(ex))
-
-    # print("Streaming user name:"+ f"{tenancy_name}/{user_name}/{stream_pool_ocid}")
-    # producer = KafkaProducer(bootstrap_servers = "streaming.us-sanjose-1.oci.oraclecloud.com:9092", 
-    #                      security_protocol = "SASL_SSL", sasl_mechanism = "PLAIN", 
-    #                      sasl_plain_username = tenancy_name + "/" + user_name + "/" + stream_pool_ocid, 
-    #                      sasl_plain_password = auth_token)
-    # key = 'key1'.encode('utf-8')
-    # data = body
-
-    # producer.send(topic_name, key=key, value=data)
-
-
     # Return a success status
     return {
         "status": 200,
