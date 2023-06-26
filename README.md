@@ -1,4 +1,4 @@
-# OCI Function  to push messages to private streaming on Object upload
+# OCI Function for Pushing Messages to a Private Streaming Endpoint upon Object Upload
 
 This function leverages Resource Principals for secure authorization, allowing the function to utilize the [OCI Python SDK](https://oracle-cloud-infrastructure-python-sdk.readthedocs.io/en/latest/index.html) for making API calls to OCI services. It retrieves the content of an uploaded object from an Object Storage bucket and proceeds to send the event and file data to a private stream endpoint.
 
