@@ -2,7 +2,7 @@
 
 This function uses Resource Principals to securely authorize a function to make
 API calls to OCI services using the [OCI Python SDK](https://oracle-cloud-infrastructure-python-sdk.readthedocs.io/en/latest/index.html).
-It returns the content of an object from a bucket in Object Storage.
+It reads the content of the object uploaded from a bucket in Object Storage and pushes the event and file data to private stream endpoint.
 
 The function calls the following OCI Python SDK classes:
 * [Resource Principals Signer](https://oracle-cloud-infrastructure-python-sdk.readthedocs.io/en/latest/api/signing.html#resource-principals-signer) to authenticate
@@ -12,7 +12,9 @@ The function calls the following OCI Python SDK classes:
 
 ## Pre-requisites
 
-Please gather following information. These values are required to configure the environment variables for function application
+1.  Setup your Functions application and Streaming service (Stream pool and Stream)
+
+2. Please gather following information. These values are required to configure the environment variables for function application
     * User ID  – The OCID of the user to authenticate with.
     * Tenancy ID  – Tenancy OCID. Can be found in user profile.
     * Fingerprint  – Will be used to authenticate to the OCI API.
@@ -21,8 +23,6 @@ Please gather following information. These values are required to configure the 
     * Stream OCID - OSS Stream OCID
     * Auth Token  - Auth Token from User settings
     * Stream endpoint - OSS Stream endpoint (Obtained from "Messages Endpoint" from Stream information screen)
-   
-
 
 ## List Applications 
 
@@ -34,7 +34,7 @@ fn ls apps
 ```
 
 
-## Create or Update your Dynamic Group
+## Create or Update Dynamic Group for OCI function
 
 In order to use other OCI Services, your function must be part of a dynamic 
 group. For information on how to create a dynamic group, refer to the 
@@ -47,12 +47,11 @@ ALL {resource.type = 'fnfunc', resource.compartment.id = 'ocid1.compartment.oc1.
 ```
 
 
-## Create or Update IAM Policies
+## Required IAM Policies
 
 Create a new policy that allows the dynamic group to `read objects` in
 the functions related compartment.
 
-![user input icon](./images/userinput.png)
 
 Your policy should look something like this:
 ```
@@ -66,7 +65,7 @@ Allow dynamic-group demo-func-dyn-group to read objects in compartment demo-func
 For more information on how to create policies, go [here](https://docs.cloud.oracle.com/iaas/Content/Identity/Concepts/policysyntax.htm).
 
 
-## Review and customize the function
+## Required files to build and deploy OCI function
 
 Review the following files in the current folder:
 
@@ -74,7 +73,7 @@ Review the following files in the current folder:
 - [func.yaml](./func.yaml) that contains metadata about your function and declares properties
 - [func.py](./func.py) which is your actual Python function
 
-The name of your function *oci-objectstorage-get-object-python* is specified in [func.yaml](./func.yaml).
+The name of your function *fn-streaming* is specified in [func.yaml](./func.yaml).
 
 
 ## Deploy the function
@@ -82,8 +81,6 @@ The name of your function *oci-objectstorage-get-object-python* is specified in 
 In Cloud Shell, run the *fn deploy* command to build the function and its dependencies as a Docker image, 
 push the image to the specified Docker registry, and deploy the function to Oracle Functions 
 in the application created earlier:
-
-![user input icon](./images/userinput.png)
 
 ```
 fn -v deploy --app <app-name>
