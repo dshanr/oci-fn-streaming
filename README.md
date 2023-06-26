@@ -1,8 +1,6 @@
 # OCI Function  to push messages to private streaming on Object upload
 
-This function uses Resource Principals to securely authorize a function to make
-API calls to OCI services using the [OCI Python SDK](https://oracle-cloud-infrastructure-python-sdk.readthedocs.io/en/latest/index.html).
-It reads the content of the object uploaded from a bucket in Object Storage and pushes the event and file data to private stream endpoint.
+This function leverages Resource Principals for secure authorization, allowing the function to utilize the [OCI Python SDK](https://oracle-cloud-infrastructure-python-sdk.readthedocs.io/en/latest/index.html) for making API calls to OCI services. It retrieves the content of an uploaded object from an Object Storage bucket and proceeds to send the event and file data to a private stream endpoint.
 
 The function calls the following OCI Python SDK classes:
 * [Resource Principals Signer](https://oracle-cloud-infrastructure-python-sdk.readthedocs.io/en/latest/api/signing.html#resource-principals-signer) to authenticate
@@ -14,7 +12,7 @@ The function calls the following OCI Python SDK classes:
 
 1.  Setup your Functions application and Streaming service (Stream pool and Stream)
 
-2. Please gather following information. These values are required to configure the environment variables for function application
+2. Please gather the following information. These values are required to configure the environment variables for function application
     * User ID  – The OCID of the user to authenticate with.
     * Tenancy ID  – Tenancy OCID. Can be found in user profile.
     * Fingerprint  – Will be used to authenticate to the OCI API.
@@ -59,7 +57,7 @@ Allow dynamic-group <dynamic-group name> to read objects in compartment <compart
 ```
 e.g.
 ```
-Allow dynamic-group demo-func-dyn-group to read objects in compartment demo-func-compartment
+Allow dynamic-group oci-streaming-fn-dyn-group to read objects in compartment ocilabs-fn-compartment
 ```
 
 For more information on how to create policies, go [here](https://docs.cloud.oracle.com/iaas/Content/Identity/Concepts/policysyntax.htm).

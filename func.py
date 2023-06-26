@@ -4,8 +4,6 @@ import logging
 import oci
 import os
 from base64 import b64encode, b64decode
-from kafka import KafkaProducer
-from fdk import response
 
 # Retrieve the values from environment variables
 tenancy_ocid = os.environ.get("OCI_TENANCY_OCID")
@@ -13,16 +11,10 @@ user_ocid = os.environ.get("OCI_USER_OCID")
 fingerprint = os.environ.get("OCI_FINGERPRINT")
 private_key_file_location = os.environ.get("OCI_PRIVATE_KEY_FILE")
 region = os.environ.get("OCI_REGION")
-compartment_ocid = os.environ.get("OCI_COMPARTMENT_OCID")
 
-# Streamin env variables
-tenancy_name = os.environ.get("OCI_TENANCY_NAME")
-stream_region = os.environ.get("OCI_STREAM_REGION")
-user_name = os.environ.get("OCI_USER_NAME")
-stream_pool_ocid = os.environ.get("OCI_STREAM_POOL_OCID")
+# Streaming env variables
 stream_ocid = os.environ.get("OCI_STREAM_OCID")
 stream_endpoint = os.environ.get("OCI_STREAM_ENDPOINT")
-topic_name = os.environ.get("OCI_STREAM_NAME")
 auth_token = os.environ.get("OCI_AUTH_TOKEN")
 
 # Set up the configuration
@@ -50,7 +42,7 @@ def handler(ctx, data: io.BytesIO = None):
 
     logging.getLogger().info('Object Content: ' + str(obj))
 
-    print("Publishing to stream endpoint -->" + stream_endpoint)
+    logging.getLogger().info("Publishing to stream endpoint -->" + stream_endpoint)
     stream_client = oci.streaming.StreamClient(config, service_endpoint=stream_endpoint)
 
     # Build message list
