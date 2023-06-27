@@ -102,8 +102,9 @@ fn -v deploy --app myapp
 To test this function, please follow the provided steps below.
   - Please make sure to enable the Function Invocation and event Rule execution logs.
 
-  - Upload a file in the object storage bucket configured in the event rule configuration created before. 
-    This will trigger the event rule and execute the function.Please note that it will take some time before we can see the function execution logs.
+  - Upload a file to the specified object storage bucket that is configured in the event rule. 
+    This action will trigger the event rule and initiate the execution of the associated function. 
+    Please be aware that there may be a delay before the function execution logs become available for viewing.
   
   - To check if the private streaming received the messages, we can use the OCI cli commands from the same VCN:
     
