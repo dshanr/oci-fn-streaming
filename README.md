@@ -10,7 +10,7 @@ The function calls the following OCI Python SDK classes:
 
 ## Pre-requisites
 
-1.  Setup your Functions application and Streaming service (Stream pool and Stream)
+1.  Setup your Functions application and Streaming service (Stream pool and Stream). Please make sure the function and OSS stream are in the same VCN.
 
 2. Please gather the following information. These values are required to configure the environment variables for function application
     * User ID  – The OCID of the user to authenticate with.
