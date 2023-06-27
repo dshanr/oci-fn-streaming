@@ -22,6 +22,17 @@ The function calls the following OCI Python SDK classes:
     * Auth Token  - Auth Token from User settings
     * Stream endpoint - OSS Stream endpoint (Obtained from "Messages Endpoint" from Stream information screen)
 
+## Configuration
+
+1.  Event Rule configuration
+    
+    ![Event Rule](./images/event_rule.png)
+
+1.  Function configuration
+    
+    ![Function Configuration](./images/fn_configuration.png)
+
+
 ## List Applications 
 
 Assuming you have successfully completed the prerequisites, you should see your 
@@ -87,3 +98,14 @@ e.g.
 ```
 fn -v deploy --app myapp
 ```
+## Test
+To test this function, please follow the provided steps below.
+  - Please make sure to enable the Function Invocation and event Rule execution logs.
+
+  - Upload a file in the object storage bucket configured in the event rule configuration created before. 
+    This will trigger the event rule and execute the function.Please note that it will take some time before we can see the function execution logs.
+  
+  - To check if the private streaming received the messages, we can use the OCI cli commands from the same VCN:
+    
+        oci streaming stream cursor create-cursor --stream-id <STREAM_ID> --partition 0 --type TRIM_HORIZON  --endpoint  <STREAM_ENDPOINT_URL>
+        oci streaming stream message get --stream-id <STREAM_ID> --endpoint  <STREAM_ENDPOINT_URL> --cursor <CURSOR_OBTAINED_FROM_PREV_COMMAND>
