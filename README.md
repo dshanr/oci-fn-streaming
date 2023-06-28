@@ -1,9 +1,9 @@
 # OCI Function for Pushing Messages to a Private Streaming Endpoint upon Object Upload
 
-This function leverages Resource Principals for secure authorization, allowing the function to utilize the [OCI Python SDK](https://oracle-cloud-infrastructure-python-sdk.readthedocs.io/en/latest/index.html) for making API calls to OCI services. It retrieves the content of an uploaded object from an Object Storage bucket and proceeds to send the event and file data to a private stream endpoint.
+This function leverages Resource Principals for secure authorization, allowing the function to utilize the [OCI Python SDK](https://docs.oracle.com/en-us/iaas/tools/python/2.105.0/) for making API calls to OCI services. It retrieves the content of an uploaded object from an Object Storage bucket and proceeds to send the event and file data to a private stream endpoint.
 
 The function calls the following OCI Python SDK classes:
-* [Resource Principals Signer](https://oracle-cloud-infrastructure-python-sdk.readthedocs.io/en/latest/api/signing.html#resource-principals-signer) to authenticate
+* [Resource Principals Signer](https://docs.oracle.com/en-us/iaas/tools/python/2.105.0/) to authenticate
 * [Object Storage Client](https://oracle-cloud-infrastructure-python-sdk.readthedocs.io/en/latest/api/object_storage/client/oci.object_storage.ObjectStorageClient.html) to interact with Object Storage
 * [OCI Stream Client](https://oracle-cloud-infrastructure-python-sdk.readthedocs.io/en/latest/api/streaming/client/oci.streaming.StreamClient.html) to publish message to stream endpoint
 
@@ -65,10 +65,13 @@ the functions related compartment.
 Your policy should look something like this:
 ```
 Allow dynamic-group <dynamic-group name> to read objects in compartment <compartment-name>
+Allow dynamic-group <dynamic-group name> use stream-push in compartment <compartment-name>
+
 ```
 e.g.
 ```
 Allow dynamic-group oci-streaming-fn-dyn-group to read objects in compartment ocilabs-fn-compartment
+Allow dynamic-group oci-streaming-fn-dyn-group use stream-push in compartment ocilabs-fn-compartment
 ```
 
 For more information on how to create policies, go [here](https://docs.cloud.oracle.com/iaas/Content/Identity/Concepts/policysyntax.htm).
