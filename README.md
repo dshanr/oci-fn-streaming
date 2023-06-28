@@ -17,7 +17,7 @@ The function calls the following OCI Python SDK classes:
     * Tenancy ID  – Tenancy OCID. Can be found in user profile.
     * Fingerprint  – Will be used to authenticate to the OCI API.
     * Region – Identifier of the region to create the requests in.    
-    * API private key  - API private key file location
+    * API private key  - API private key file location Please ensure that the API key file (oci_api_key.pem) is included in the function package, following the function configuration example provided.
     * Stream OCID - OSS Stream OCID
     * Auth Token  - Auth Token from User settings
     * Stream endpoint - OSS Stream endpoint (Obtained from "Messages Endpoint" from Stream information screen)
