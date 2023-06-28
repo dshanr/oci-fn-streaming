@@ -58,7 +58,7 @@ ALL {resource.type = 'fnfunc', resource.compartment.id = 'ocid1.compartment.oc1.
 
 ## Required IAM Policies
 
-Create a new policy that allows the dynamic group to `read objects` in
+Create a new policy that allows the dynamic group to `read objects` and `stream push` in
 the functions related compartment.
 
 
